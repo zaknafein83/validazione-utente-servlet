@@ -5,16 +5,19 @@ import java.sql.SQLException;
 
 import javax.mail.MessagingException;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import it.dstech.gestione_libreria.model.Utente;
 import it.dstech.gestione_libreria.repository.DBManagment;
 import it.dstech.gestione_libreria.service.EmailUtility;
 
 @WebServlet(urlPatterns = { "/registrazione" })
+@MultipartConfig
 public class RegistrazioneController extends HttpServlet {
 
 	@Override
@@ -27,10 +30,12 @@ public class RegistrazioneController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String username = req.getParameter("username");
 		String password = req.getParameter("password");
+		Part imagePart = req.getPart("image");
+		
 		DBManagment gestioneDB = null;
 		try {
 			gestioneDB = new DBManagment();
-			Utente utente = gestioneDB.salvaUtente(username, password);
+			Utente utente = gestioneDB.salvaUtente(username, password, imagePart.getInputStream());
 			EmailUtility.sendEmail(utente.getUsername(), "Conferma Mail", generaLinkValidazioneUtente(utente));
 			gestioneDB.close();
 			req.setAttribute("message", "Controlla la mail per attivare l'account");

@@ -8,9 +8,9 @@ public class Utente {
 
 	private boolean active;
 
-	private byte[] image;
+	private String image;
 
-	public Utente(String username, String password, boolean active, byte[] image) {
+	public Utente(String username, String password, boolean active, String image) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -42,11 +42,11 @@ public class Utente {
 		this.active = active;
 	}
 
-	public byte[] getImage() {
+	public String getImage() {
 		return image;
 	}
 
-	public void setImage(byte[] image) {
+	public void setImage(String image) {
 		this.image = image;
 	}
 

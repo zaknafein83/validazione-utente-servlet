@@ -8,9 +8,10 @@
 </head>
 <body>
 <h1>Effettua la registraizone</h1>
-<form action="registrazione" method="post">
+<form action="registrazione" method="post" enctype="multipart/form-data">
 	<input type="text" name="username" placeholder="Inserisci la mail">
 	<input type="password" name="password" placeholder="Inserisci la password">
+	<input type="file" name="image" placeholder="Inserisci l'immagine del profilo">
 	<input type="submit" name="action" value="Registra" />
 </form>
 

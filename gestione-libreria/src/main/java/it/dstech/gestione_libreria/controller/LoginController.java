@@ -40,7 +40,7 @@ public class LoginController extends HttpServlet {
 					database.close();
 					req.getRequestDispatcher("/home_page.jsp").forward(req, resp);
 				} else {
-					req.setAttribute("username", username);
+					req.setAttribute("utente", utente);
 					database.close();
 					req.getRequestDispatcher("/profilo_utente.jsp").forward(req, resp);
 				}
